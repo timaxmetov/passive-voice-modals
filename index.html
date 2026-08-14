@@ -301,7 +301,7 @@ button{font-family:inherit; cursor:pointer}
   background:linear-gradient(120deg,var(--coral-3),var(--violet-2)); box-shadow:var(--shadow-1)}
 .readout .eyebrow{opacity:.7; display:block; margin-bottom:8px}
 .readout .sent{font-family:var(--f-mono); font-size:clamp(14px,4vw,19px); font-weight:700; min-height:2.6em; line-height:1.4}
-.readout .sent .w{display:inline-block; animation:wpop .34s cubic-bezier(.2,1.4,.4,1) both; margin-right:.32em}
+.readout .sent .w{display:inline-block; animation:wpop .34s cubic-bezier(.2,1.4,.4,1) both}
 @keyframes wpop{from{opacity:0; transform:translateY(9px) scale(.9)}}
 .readout .ru2{font-size:13px; opacity:.86; margin-top:8px; min-height:1.4em}
 .readout .acts{display:flex; gap:9px; margin-top:15px; flex-wrap:wrap}
@@ -1317,9 +1317,10 @@ function buildSentence(){
   var txt=words.join(' ');
   if(BSLOT[4]!==null) txt+='.';
   s.innerHTML='';
-  txt.split(' ').forEach(function(w,i){
+  txt.split(' ').forEach(function(w,i,all){
     var sp=document.createElement('span'); sp.className='w'; sp.textContent=w;
     sp.style.animationDelay=(i*45)+'ms'; s.appendChild(sp);
+    if(i<all.length-1) s.appendChild(document.createTextNode(' '));
   });
   /* russian gloss */
   var ru=[];
